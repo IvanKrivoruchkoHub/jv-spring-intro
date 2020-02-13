@@ -20,7 +20,7 @@ public class AppConfig {
     @Bean
     public DataSource getDataSource() {
         BasicDataSource dataSource = new BasicDataSource();
-        dataSource.setDriverClassName("com.mysql.jdbc.Driver");
+        dataSource.setDriverClassName("com.mysql.cj.jdbc.Driver");
         dataSource.setUrl("jdbc:mysql://localhost:3306/spring_intro_db?serverTimezone=UTC");
         dataSource.setUsername("ivan");
         dataSource.setPassword("1234");
@@ -30,10 +30,11 @@ public class AppConfig {
     public LocalSessionFactoryBean getSessionFactory() {
         LocalSessionFactoryBean localSessionFactoryBean = new LocalSessionFactoryBean();
         localSessionFactoryBean.setDataSource(getDataSource());
-        Properties props = new Properties();
-        props.put("hibernate.show_sql", "true");
-        props.put("hibernate.hbm2ddl.auto", "create-drop");
-        localSessionFactoryBean.setHibernateProperties(props);
+        Properties properties = new Properties();
+        properties.put("hibernate.dialect", "org.hibernate.dialect.MySQL5Dialect");
+        properties.put("hibernate.show_sql", "true");
+        properties.put("hibernate.hbm2ddl.auto", "create-drop");
+        localSessionFactoryBean.setHibernateProperties(properties);
         localSessionFactoryBean.setAnnotatedClasses(User.class);
         return localSessionFactoryBean;
     }

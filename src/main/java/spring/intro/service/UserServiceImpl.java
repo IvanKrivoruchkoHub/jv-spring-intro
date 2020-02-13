@@ -13,7 +13,6 @@ import org.springframework.stereotype.Service;
 public class UserServiceImpl implements UserService {
 
     @Autowired
-    @Qualifier(value = "userDaoImpl")
     private UserDao userDao;
 
     @Override
