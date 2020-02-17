@@ -29,4 +29,10 @@ public class UserServiceImpl implements UserService {
     public List<User> getAll() {
         return userDao.getAll();
     }
+
+    @Override
+    public User getById(Long userId) {
+        return userDao.getById(userId);
+    }
+
 }
